@@ -3,10 +3,8 @@ Created on Sep 7, 2018
 
 @author: Inthuch Therdchanakul
 '''
+from .vars import DATA_DIRS, BASE_DIR
 import os
-
-DATA_DIRS = ['Train', 'Validation', 'Test']
-BASE_DIR = '../EmoReact_V_1.0/'
 
 def create_dirs():
     if not os.path.exists(BASE_DIR + 'frames/'):
@@ -32,7 +30,3 @@ def extract_frames():
             command = 'ffmpeg -i ' + video_file + ' -vf thumbnail=2,setpts=N/TB -r 1 -vframes 300 ' + save_path + '%05d.jpg'
             os.system(command)
         print('Completed frames extraction from ' + data_dir + ' directory')
-        
-if __name__ == '__main__':
-    create_dirs()
-    extract_frames()
