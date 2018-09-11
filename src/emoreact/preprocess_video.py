@@ -9,14 +9,12 @@ import os
 def create_dirs():
     if not os.path.exists(BASE_DIR + 'frames/'):
         os.mkdir(BASE_DIR + 'frames')
-        os.mkdir(BASE_DIR + 'frames/Train')
-        os.mkdir(BASE_DIR + 'frames/Validation')
-        os.mkdir(BASE_DIR + 'frames/Test')
+        for data_dir in DATA_DIRS:
+            os.mkdir(BASE_DIR + 'frames/' + data_dir)
     if not os.path.exists(BASE_DIR + 'aligned/'):
         os.mkdir(BASE_DIR + 'aligned/')
-        os.mkdir(BASE_DIR + 'aligned/Train')
-        os.mkdir(BASE_DIR + 'aligned/Validation')
-        os.mkdir(BASE_DIR + 'aligned/Test')
+        for data_dir in DATA_DIRS:
+            os.mkdir(BASE_DIR + 'aligned/' + data_dir)
         
 def extract_frames():
     #go through video folder
