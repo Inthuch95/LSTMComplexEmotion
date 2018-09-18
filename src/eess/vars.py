@@ -19,7 +19,7 @@ EMOTIONS = ['Afraid', 'Afraid_Low_Intensity', 'Angry', 'Angry_Low_Intensity', 'A
             'Unfriendly', 'Worried']
 BASE_DIR = '../EUData/'
 IMG_WIDTH, IMG_HEIGHT = 100,100
-SEQ_LENGTH = 2
+SEQ_LENGTH = 3
 OVERLAP_IDX = int(0.9 * SEQ_LENGTH)
 MODEL = VGG16(include_top=False, weights='imagenet')
 START_IDX = 10
