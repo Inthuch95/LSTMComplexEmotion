@@ -12,7 +12,7 @@ if __name__ == '__main__':
     # model parameters
     feature = 'VGG16'
     n_layer = 1
-    lstm_unit = 32
+    lstm_unit = 512
     batch_size = 256
     epochs = 250
     

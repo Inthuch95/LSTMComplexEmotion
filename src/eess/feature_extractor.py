@@ -27,9 +27,9 @@ def extract_features():
     # use onehot encoding for LSTM
     y = to_categorical(y, num_classes=len(EMOTIONS))
     # save to binary files
-    print('Saving sequence')
     np.save(BASE_DIR + 'X_vgg16.npy', X)
     np.save(BASE_DIR + 'y_vgg16.npy', y)
+    print('Sequences saved')
     
 def process_frames(frames, video_path, emotion, X, y):
     sequence = []      
