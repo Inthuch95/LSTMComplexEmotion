@@ -12,20 +12,22 @@ import os
 def extract_feature_sequence():
     X, y_emo, y_valence = [], [], []
     for i in range(len(DATA_DIRS)):
+        # get list of videos from text file
         with open('../' + DATA_TYPES[i] + '_names.txt', 'r') as f:
             videos = [video.rstrip().strip("\'").replace("''", "'") for video in f.readlines()]
         labels = np.loadtxt(BASE_DIR + 'Labels/' + DATA_TYPES[i].lower() + '_labels.text', dtype='int', delimiter=',')
         for j in range(len(videos)):
+            print('Directory: {}, Video: {}'.format(DATA_DIRS[i], videos[j]))
             video_path = BASE_DIR + 'aligned/' + DATA_DIRS[i] + '/' + videos[j]
             frames = [f for f in os.listdir(video_path) if os.path.isfile(os.path.join(video_path, f))]
             if len(frames) >= SEQ_LENGTH:
-                X, y_emo, y_valence = process_frames(X, y_emo, y_valence, frames, video_path, labels[i])
+                X, y_emo, y_valence = process_frames(X, y_emo, y_valence, frames, video_path, labels[j])
         print('{} sequences extracted'.format(DATA_DIRS[i]))
         # save to binary files
         np.save(BASE_DIR + 'X_' + DATA_TYPES[i].lower() + '_vgg16.npy', X)
         np.save(BASE_DIR + 'y_emo_' + DATA_TYPES[i].lower() + '_vgg16.npy', y_emo)
         np.save(BASE_DIR + 'y_valence_' + DATA_TYPES[i].lower() + '_vgg16.npy', y_valence)
-        print(X.shape, y_emo.shape, y_valence.shape)
+        print(np.array(X).shape, np.array(y_emo).shape, np.array(y_valence).shape)
         X, y_emo, y_valence = [], [], []
         print('{} sequences saved'.format(DATA_DIRS[i]))
         
