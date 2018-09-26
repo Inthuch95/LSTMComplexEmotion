@@ -22,7 +22,7 @@ def extract_features():
             if len(frames) > START_IDX:
                 frames = frames[START_IDX+1:]
                 if len(frames) >= SEQ_LENGTH:
-                    X, y = process_frames(frames, video_path, emotion, X, y)
+                    X, y = process_frames(X, y, frames, video_path, emotion)
         print('{} sequences extracted'.format(emotion))
     # use onehot encoding for LSTM
     y = to_categorical(y, num_classes=len(EMOTIONS))
@@ -31,7 +31,7 @@ def extract_features():
     np.save(BASE_DIR + 'y_vgg16.npy', y)
     print('Sequences saved')
     
-def process_frames(frames, video_path, emotion, X, y):
+def process_frames(X, y, frames, video_path, emotion):
     sequence = []      
     for frame in frames:
         frame = video_path + '/' + frame

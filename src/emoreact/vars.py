@@ -6,6 +6,7 @@ Created on Sep 10, 2018
 from keras.applications.vgg16 import VGG16
 
 DATA_DIRS = ['Train', 'Validation', 'Test']
+DATA_TYPES = ['Train', 'Val', 'Test']
 BASE_DIR = '../EmoReact_V_1.0/'
 IMG_WIDTH, IMG_HEIGHT = 100,100
 SEQ_LENGTH = 2
