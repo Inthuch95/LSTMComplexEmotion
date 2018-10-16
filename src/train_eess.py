@@ -23,7 +23,7 @@ if __name__ == '__main__':
     
     # load data and train the LSTM model    
     X_train, y_train, X_val, y_val, X_test, y_test = load_vgg_sequence()
-    lstm_net = LSTMNetwork(n_layer, lstm_unit, X_train.shape[1:], EMOTIONS, feature=feature)
+    lstm_net = LSTMNetwork(n_layer, lstm_unit, X_train.shape[1:], EMOTIONS, BASE_DIR, feature=feature)
     lstm_net.train(X_train, y_train, X_val, y_val, epochs=epochs, batch_size=batch_size)
     lstm_net.evaluate(X_val, y_val)
     lstm_net.compare_model(X_val, y_val)

@@ -12,3 +12,4 @@ IMG_WIDTH, IMG_HEIGHT = 100,100
 SEQ_LENGTH = 2
 OVERLAP_IDX = int(0.9 * SEQ_LENGTH)
 MODEL = VGG16(include_top=False, weights='imagenet')
+EMOTIONS = ['Curiosity', 'Uncertainty', 'Excitement', 'Happiness', 'Surprise', 'Disgust', 'Fear', 'Frustration']
