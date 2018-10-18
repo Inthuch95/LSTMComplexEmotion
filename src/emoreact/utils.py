@@ -7,6 +7,29 @@ from sklearn.metrics import accuracy_score
 from .vars import BASE_DIR
 import numpy as np
 
+def load_data(feature='vgg16', label_type='emotion'):
+    if feature == 'vgg16':
+        X_train, y_train, X_val, y_val, X_test, y_test = load_vgg_sequence(label_type)
+    elif feature == 'visual':
+        X_train, y_train, X_val, y_val, X_test, y_test = load_visual_feats_sequence(label_type)
+    else:
+        print('Invalid parameters')
+        return 0
+    return X_train, y_train, X_val, y_val, X_test, y_test
+        
+def load_visual_feats_sequence(label_type='emotion'):
+    # load data
+    X_train = np.load(BASE_DIR + 'X_train_visual.npy')
+    y_train = np.load(BASE_DIR + 'y_' + label_type + '_train_visual.npy')
+    
+    X_val = np.load(BASE_DIR + 'X_val_visual.npy')
+    y_val = np.load(BASE_DIR + 'y_' + label_type + '_val_visual.npy')
+    
+    X_test = np.load(BASE_DIR + 'X_test_visual.npy')
+    y_test = np.load(BASE_DIR + 'y_' + label_type + '_test_visual.npy')
+    
+    return X_train, y_train, X_val, y_val, X_test, y_test
+
 def load_vgg_sequence(label_type='emotion'):
     # load data
     X_train = np.load(BASE_DIR + 'X_train_vgg16.npy')

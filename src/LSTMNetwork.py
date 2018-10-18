@@ -6,15 +6,11 @@ Created on Aug 13, 2018
 from keras.models import Sequential, load_model
 from keras.layers import LSTM, Dense
 from keras.callbacks import TensorBoard, ModelCheckpoint
-from sklearn.metrics import confusion_matrix
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import time
 import os
 
 class LSTMNetwork():
-    def __init__(self, n_layer, lstm_unit, input_shape, labels, base_dir, feature='VGG16', output_activation='softmax'):
+    def __init__(self, n_layer, lstm_unit, input_shape, labels, base_dir, feature='vgg16', output_activation='softmax'):
         self.labels = labels
         
         self.model = Sequential()
@@ -35,7 +31,7 @@ class LSTMNetwork():
         self.model.add(Dense(nb_class, activation=output_activation))
         
         current_time = time.strftime("%Y%m%d-%H%M%S")
-        self.base_dir = base_dir + 'LSTM/' + feature + '/'
+        self.base_dir = base_dir + 'LSTM/' + feature.upper() + '/'
         self.model_dir = 'LSTM_' + str(n_layer) + '_' + str(lstm_unit) + '_' + current_time + '/'
         filename = 'LSTM.h5'
         self.model_file = self.base_dir + self.model_dir + filename
@@ -57,31 +53,6 @@ class LSTMNetwork():
                   batch_size=batch_size,
                   validation_data=(X_val, y_val),
                 callbacks=callbacks)
-        
-#     def evaluate(self, X_val, y_val):
-#         # evaluate_vgg16 the model with validation set
-#         model = load_model(self.model_file)
-#         scores = model.evaluate(X_val, y_val)
-#         print('val_loss: {}, val_acc: {}'.format(scores[0], scores[1]))
-#         
-#         y_true, y_pred = get_predictions_and_labels(model, X_val, y_val)
-#         cm = confusion_matrix(y_true, y_pred)
-#         cm_percent = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-#         df = pd.DataFrame(cm_percent, index=self.labels, columns=self.labels)
-#         df.index.name = 'Actual'
-#         df.columns.name = 'Predicted'
-#         df.to_csv(self.base_dir+self.model_dir+'cm_val.csv', float_format='%.4f')
-#         
-#         # plot percentage confusion matrix
-#         fig1, ax1 = plt.subplots()
-#         plot_confusion_matrix(cm_percent, class_names=[i for i in range(1, len(self.labels) + 1)])
-#         plt.savefig(self.base_dir + self.model_dir + 'cm_percent_val.png', format='png')
-#         # plot normal confusion matrix
-#         fig2, ax2 = plt.subplots()
-#         plot_confusion_matrix(cm, float_display='.0f', class_names=[i for i in range(1, len(self.labels) + 1)])
-#         plt.savefig(self.base_dir + self.model_dir + 'cm_val.png', format='png')
-#         
-#         plt.show()
         
     def load_best_model(self):
         model = load_model(self.model_file)
