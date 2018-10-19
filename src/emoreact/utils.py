@@ -46,6 +46,14 @@ def load_vgg_sequence(label_type='emotion'):
     
     return X_train, y_train, X_val, y_val, X_test, y_test
 
+def display_results(y_true, y_pred):
+    print('Summary\n')
+    print('Exact match ratio: {}'.format(exact_match_ratio(y_true, y_pred)))
+    print('Accuracy: {}'.format(accuracy(y_true, y_pred)))
+    print('Precision: {}'.format(precision(y_true, y_pred)))
+    print('Recall: {}'.format(recall(y_true, y_pred)))
+    print('F1-Measure: {}'.format(f1_measure(y_true, y_pred)))
+
 def exact_match_ratio(actual, predicted):
     '''
     Ignore partially correct (consider them as incorrect) and

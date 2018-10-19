@@ -57,15 +57,6 @@ class LSTMNetwork():
     def load_best_model(self):
         model = load_model(self.model_file)
         return model
-        
-    def compare_model(self, X_val, y_val):
-        folder_list = [model_dir for model_dir in os.listdir(self.base_dir) if 'LSTM' in model_dir]
-        for folder in folder_list:
-            filename = 'LSTM.h5'
-            path = os.path.join(self.base_dir, folder, filename)
-            model = load_model(path)
-            scores = model.evaluate(X_val, y_val)
-            print('model: {}, val_loss: {}, val_acc: {}'.format(folder, scores[0], scores[1]))
 
 if __name__ == '__main__':
     pass

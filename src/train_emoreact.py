@@ -4,23 +4,15 @@ Created on Sep 28, 2018
 @author: Inthuch Therdchanakul
 '''
 from LSTMNetwork import LSTMNetwork
-from emoreact.utils import load_data, exact_match_ratio, accuracy, precision, recall, f1_measure
+from emoreact.utils import load_data, display_results
 from emoreact.vars import EMOTIONS, BASE_DIR
 import os
 
-def display_results(y_true, y_pred):
-    print('Summary\n')
-    print('Exact match ratio: {}'.format(exact_match_ratio(y_true, y_pred)))
-    print('Accuracy: {}'.format(accuracy(y_true, y_pred)))
-    print('Precision: {}'.format(precision(y_true, y_pred)))
-    print('Recall: {}'.format(recall(y_true, y_pred)))
-    print('F1-Measure: {}'.format(f1_measure(y_true, y_pred)))
-
 if __name__ == '__main__':
     # model parameters
-    feature = 'vgg16'
-    n_layer = 2
-    lstm_unit = 16
+    feature = 'visual'
+    n_layer = 1
+    lstm_unit = 32
     batch_size = 32
     epochs = 30
     
