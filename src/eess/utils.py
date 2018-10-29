@@ -10,7 +10,19 @@ import itertools
 from .vars import BASE_DIR, EMOTIONS
 import numpy as np
 
-def display_results(lstm_net, X, y):
+def display_results(model, X, y, feature):
+    # evaluate the model with validation set
+    scores = model.evaluate(X, y)
+    print('test_loss: {}, test_acc: {}'.format(scores[0], scores[1]))
+     
+    y_true, y_pred = get_predictions_and_labels(model, X, y)
+    cm = confusion_matrix(y_true, y_pred)
+    # plot normal confusion matrix
+    fig1, ax1 = plt.subplots()
+    plot_confusion_matrix(cm, float_display='.0f', class_names=[i for i in range(1, len(EMOTIONS) + 1)])
+    plt.savefig(BASE_DIR + 'best/' + feature.upper() + '/cm_test.png', format='png')
+
+def display_val_results(lstm_net, X, y):
     # evaluate_vgg16 the model with validation set
     model = lstm_net.load_best_model()
     scores = model.evaluate(X, y)
